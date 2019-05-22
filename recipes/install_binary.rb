@@ -7,8 +7,9 @@
 #
 #
 
-include_recipe 'libarchive::default' unless Chef::VERSION.to_i >= 14
 require 'chef/version_constraint'
+
+include_recipe 'libarchive::default' unless Chef::VERSION.to_i >= 14
 
 url = ::URI.join(node['consul_template']['base_url'],
                  "#{node['consul_template']['version']}/",
