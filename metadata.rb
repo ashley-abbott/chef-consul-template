@@ -14,10 +14,7 @@ recipe 'consul-template::service', 'Configures and starts the consul-template se
 supports 'ubuntu', '>= 14.04'
 supports 'debian', '>= 8.9'
 supports 'centos', '>= 6.9'
-supports 'arch'
-supports 'windows'
 
-depends 'libarchive', '>= 2.0.0'
 depends 'golang'
 depends 'runit'
 depends 'nssm'
