@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem 'berkshelf'
-gem 'chef', '~> 12.7.2'
+gem 'chef', '~> 14.10'
 gem 'chefspec'
 gem 'coveralls', require: false
 gem 'foodcritic'
