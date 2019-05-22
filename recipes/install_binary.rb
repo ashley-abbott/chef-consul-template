@@ -26,7 +26,7 @@ end
 
 libarchive_version = run_context.cookbook_collection['libarchive'].version.to_f.round(2)
 case libarchive_version
-when 2.0
+when libarchive_version >= 2.0
   archive_file ConsulTemplateHelpers.install_file(node) do
     path download_path
     extract_to install_path
