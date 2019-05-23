@@ -7,10 +7,6 @@
 #
 #
 
-require 'chef/version_constraint'
-
-include_recipe 'libarchive::default' unless Chef::VERSION.to_i >= 14
-
 remote_file "#{Chef::Config[:file_cache_path]}/consul-template-#{node['consul_template']['version']}.zip" do
   source "https://releases.hashicorp.com/consul-template/#{node['consul_template']['version']}/consul-template_#{node['consul_template']['version']}_linux_amd64.zip"
   checksum ConsulTemplateHelpers.install_checksum(node)
