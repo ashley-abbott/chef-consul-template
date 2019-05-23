@@ -21,4 +21,4 @@ depends 'nssm'
 
 issues_url 'https://github.com/adamkrone/chef-consul-template/issues' if respond_to?(:issues_url)
 source_url 'https://github.com/adamkrone/chef-consul-template' if respond_to?(:source_url)
-chef_version '>= 14.0' if respond_to?(:chef_version)
+chef_version '>= 12.21.2' if respond_to?(:chef_version)
