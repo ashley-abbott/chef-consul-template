@@ -5,8 +5,7 @@ def whyrun_supported?
 end
 
 action :create do
-  templates = new_resource.templates.map { |v| Mash.from_hash(v) }
-
+  templates = new_resource.templates.map
   case node['consul_template']['init_style']
   when 'runit', 'systemd', 'upstart'
     consul_template_user = node['consul_template']['service_user']
