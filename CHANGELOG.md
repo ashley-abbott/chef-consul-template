@@ -1,6 +1,12 @@
 Consul Template Cookbook Changelog
 ==================================
 
+## v0.15.0 (June 4th, 2020)
+
+IMPROVEMENTS
+
+- generated checksums for 0.25.0
+
 ## v0.13.0 (December 20th, 2017)
 
 BREAKING CHANGES:
