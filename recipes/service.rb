@@ -1,19 +1,13 @@
 #
-# Cookbook Name:: consul-template
+# Cookbook:: consul-template
 # Recipe:: service
 #
-# Copyright (C) 2014
+# Copyright:: (C) 2014
 #
 #
 #
 
 require 'json'
-
-# systemd configuration reload
-execute 'systemctl-daemon-reload' do
-  command '/bin/systemctl --system daemon-reload'
-  action :nothing
-end
 
 # Configure directories
 consul_template_directories = []
@@ -56,7 +50,7 @@ consul_template_directories.each do |dirname|
   directory dirname do
     owner consul_template_user
     group consul_template_group
-    mode 0o755
+    mode '755'
   end
 end
 
@@ -94,7 +88,7 @@ when 'init', 'upstart'
 
   template init_file do
     source init_tmpl
-    mode 0o755
+    mode '755'
     variables(
       command: command,
       options: options,
@@ -109,14 +103,14 @@ when 'init', 'upstart'
   service 'consul-template' do
     provider Chef::Provider::Service::Upstart if is_upstart
     supports status: true, restart: true, reload: true
-    action %i[enable start]
+    action %i(enable start)
     subscribes :restart, "libarchive_file[#{ConsulTemplateHelpers.install_file(node)}]", :delayed
   end
 
 when 'runit'
   runit_service 'consul-template' do
     supports status: true, restart: true
-    action %i[enable start]
+    action %i(enable start)
     log true
     options(
       command: command,
@@ -128,21 +122,35 @@ when 'runit'
   end
 
 when 'systemd'
-  template '/etc/systemd/system/consul-template.service' do
-    source 'consul-template-systemd.erb'
-    mode 0o644
-    variables(
-      command: command,
-      options: options,
-      environment: node['consul_template']['environment_variables']
+  systemd_unit 'consul-template.service' do
+    content(
+      Unit: {
+        Description: 'Consul Template Daemon',
+        Wants: 'basic.target',
+        After: 'basic.target network.target',
+      },
+      Service: {
+        Environment: "#{node['consul_template']['environment_variables'].map { |key, val| %("#{key}=#{val}") }.join(' ')}",
+        User: "#{node['consul_template']['service_user']}",
+        Group: "#{node['consul_template']['service_group']}",
+        ExecStart: "#{command} #{options}",
+        ExecReload: '/bin/kill -HUP $MAINPID',
+        ExecStop: '/bin/kill -INT $MAINPID',
+        KillMode: 'process',
+        Restart: 'on-failure',
+        RestartSec: '42s',
+      },
+      Install: {
+        WantedBy: 'multi-user.target',
+      }
     )
-    notifies :run, 'execute[systemctl-daemon-reload]', :immediately
-    notifies :restart, 'service[consul-template]', :immediately
+    triggers_reload true
+    action [:create, :enable]
+    notifies :start, 'service[consul-template]', :delayed
   end
 
   service 'consul-template' do
     supports status: true, restart: true, reload: true
-    action %i[enable start]
-    subscribes :restart, "libarchive_file[#{ConsulTemplateHelpers.install_file(node)}]", :delayed
+    action :nothing
   end
 end

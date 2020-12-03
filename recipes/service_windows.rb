@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: consul-template
+# Cookbook:: consul-template
 # Recipe:: service_windows
 #
-# Copyright (C) 2016
+# Copyright:: (C) 2016
 #
 #
 #
@@ -41,5 +41,5 @@ end
 
 service service_name do
   supports status: true, restart: true, start: true
-  action %i[enable start]
+  action %i(enable start)
 end

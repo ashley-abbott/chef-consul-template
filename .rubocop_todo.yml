@@ -9,7 +9,7 @@
 # Offense count: 237
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
 # URISchemes: http, https
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 # Offense count: 1
@@ -28,7 +28,7 @@ Style/Documentation:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/EmptyLines:
+Layout/EmptyLines:
   Exclude:
     - 'test/integration/default/serverspec/template_lwrp_spec.rb'
 
@@ -40,7 +40,7 @@ Style/EmptyLiteral:
 
 # Offense count: 1
 # Configuration parameters: ExpectMatchingDefinition, Regex, IgnoreExecutableScripts.
-Style/FileName:
+Naming/FileName:
   Exclude:
     - 'libraries/consul-template_helpers.rb'
 

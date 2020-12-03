@@ -48,6 +48,8 @@ suites:
           bootstrap_expect: 1
           server: true
       consul_template:
+        environment_variables:
+          APP_ENV: 'sandbox-uk'
         config:
           consul: '127.0.0.1:8500'
   - name: runit

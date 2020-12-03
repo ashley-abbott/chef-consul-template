@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: consul-template
+# Cookbook:: consul-template
 # Recipe:: install_windows_source
 #
-# Copyright (C) 2016
+# Copyright:: (C) 2016
 #
 #
 #

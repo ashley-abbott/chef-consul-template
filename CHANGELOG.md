@@ -1,6 +1,13 @@
 Consul Template Cookbook Changelog
 ==================================
 
+## v0.17.0 (December 3rd, 2020)
+
+IMPROVEMENTS
+
+- using systemed_unit in place of template
+- don't start the service till the end of convergence
+
 ## v0.15.0 (June 4th, 2020)
 
 IMPROVEMENTS

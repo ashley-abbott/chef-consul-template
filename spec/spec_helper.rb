@@ -14,4 +14,4 @@ RSpec.configure do |config|
   config.version = '14.04'
 end
 
-at_exit { ChefSpec::Coverage.report! }
+

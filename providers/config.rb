@@ -1,8 +1,4 @@
-use_inline_resources if defined?(use_inline_resources)
 
-def whyrun_supported?
-  true
-end
 
 action :create do
   templates = new_resource.templates
@@ -23,16 +19,16 @@ action :create do
 
   # Ensure config directory exists
   directory node['consul_template']['config_dir'] do
-    unless node['platform'] == 'windows'
+    unless platform?('windows')
       user consul_template_user
       group consul_template_group
-      mode 0o755
+      mode '755'
     end
     recursive true
     action :create
   end
 
-  if node['platform'] == 'windows'
+  if platform?('windows')
     template ::File.join(node['consul_template']['config_dir'], new_resource.name) do
       cookbook 'consul-template'
       source 'config-template-win.json.erb'

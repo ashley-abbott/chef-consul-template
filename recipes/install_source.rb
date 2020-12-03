@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: consul-template
+# Cookbook:: consul-template
 # Recipe:: install_source
 #
-# Copyright (C) 2014
+# Copyright:: (C) 2014
 #
 #
 #

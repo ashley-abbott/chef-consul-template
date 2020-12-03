@@ -7,7 +7,7 @@ describe 'Сonsul template service' do
   it 'has an executable file' do
     expect(file(
              'C:\\Program Files\\consul_template\\consul-template_0.16.0_windows_amd64\\consul-template.exe'
-    )).to exist
+           )).to exist
   end
 
   it 'has a configuration file' do
@@ -27,13 +27,13 @@ describe 'consul_template_config LWRP' do
   it 'has a configuration file' do
     expect(file(
              'C:\\Program Files\\consul_template\\consul_template.d\\test'
-    )).to be_file
+           )).to be_file
     expect(file(
              'C:\\Program Files\\consul_template\\consul_template.d\\test'
-    )).to contain 'source = "C:/test.config.ctmpl"'
+           )).to contain 'source = "C:/test.config.ctmpl"'
     expect(file(
              'C:\\Program Files\\consul_template\\consul_template.d\\test'
-    )).to contain 'destination = "C:/test.config"'
+           )).to contain 'destination = "C:/test.config"'
   end
 
   it 'executed trigger command' do

@@ -1,7 +1,7 @@
 task default: "all"
 
 desc "Run all tests"
-task all: %i[rubocop foodcritic chefspec]
+task all: %i(rubocop foodcritic chefspec)
 
 # rubocop style checker
 require "rubocop/rake_task"
